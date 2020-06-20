@@ -81,6 +81,7 @@ int main(){
 			std::cout<<"Goodbye!"<<std::endl;
 			break;
 		}else{
+			std::cout<<"\n\n";
 			P.reset();
 			D.reset();
 			d.resetDeck();
