@@ -8,7 +8,8 @@
 #define PLAYER_HH
 class player{
 	public:
-		player(const char* player_name,int m){
+		player(const char* player_name,int m)
+		{
 			setFunds(m);
 			lastBet = 0;
 			name=std::string(player_name);
@@ -21,26 +22,29 @@ class player{
 			chk=false;
 			blkjk=false;
 			betchk=false;
-			dd=true;
 			hand.clear();
 		}
 		
-		void setFunds(int i){
+		void setFunds(int i)
+		{
 			if(i>1000){
 				i=1000;
 			}
 			funds = i;
 		}
 		
-		void addFunds(int i){
+		void addFunds(int i)
+		{
 			funds = funds + i;
 		}
 		
-		int getFunds(){
+		int getFunds()
+		{
 			return funds;
 		}
 		
-		void checkName(std::string s){
+		void checkName(std::string s)
+		{
 			if(strlen(s.c_str())>20){
 				std::cout<<"Your name: \n"<<s<<"\nis too long. Maximum 20 characters!"<<std::endl;
 				std::cout<<"Please reset your name: ";
@@ -52,16 +56,19 @@ class player{
 			}
 		}
 		
-		void bet(int b){
+		void bet(int b)
+		{
 			funds = funds-b;
 			lastBet=b;
 		}
 		
-		int getLastBet(){
+		int getLastBet()
+		{
 			return lastBet;
 		}
 		
-		void result(int dealerTotal){
+		void result(int dealerTotal)
+		{
 			if(getBlkjk()){
 				win();
 				return;
@@ -83,43 +90,53 @@ class player{
 			}
 		}
 		
-		void blackJack(){
+		void blackJack()
+		{
 			std::cout<<"\033[1;42mBLACKJACK!!\033[0m"<<std::endl;
 			funds = funds + lastBet;
 			blkjk = true;
 		}
 		
-		void win(){
+		void win()
+		{
 			std::cout<<"\033[1;42mYou won!\033[0m"<<std::endl;
 			funds = funds + 2*lastBet;
 		}
-		void tie(){
+		void tie()
+		{
 			std::cout<<"You tied with the dealer."<<std::endl;
 			funds = funds + lastBet;
 		}
-		void lose(){
+		void lose()
+		{
 			std::this_thread::sleep_for(std::chrono::milliseconds(500));
 			std::cout<<"\033[1;31mYou lost!\033[0m"<<std::endl;
 		}
 		
-		deck getCards(deck d){
+		deck getCards(deck d)
+		{
 			int card1 = d.giveCard();
-			if(card1==1){card1=11;}
+			if (card1==1) {
+				card1=11;
+			}
+
 			hand.push_back(card1);
 			int card2 = d.giveCard();
-			if(card2==1&&card1<11){card2=11;}
+			if (card2==1&&card1<11) {
+				card2=11;
+			}
+
 			hand.push_back(card2);
 			handTotal = card1 + card2;
 			std::cout<<"Hand contains: "<<hand[0]<<"   "<<hand[1]<<std::endl;
 			std::cout<<"Total for player "<<name<<" = "<<handTotal<<std::endl;
-			if(handTotal==21){
+			if (handTotal==21) {
 				blackJack();
 			}
 			return d;
 		}
 		
 		deck move(std::string move, deck d){
-			dd  = false;
 			transform(move.begin(),move.end(),move.begin(),[](unsigned char c){return std::tolower(c);});
 			if(move=="hit" || move=="h"){
 				int newCard = d.giveCard();
@@ -159,7 +176,8 @@ class player{
 			return d;
 		}
 		
-		void reset(){
+		void reset()
+		{
 			handTotal = 0;
 			handTotalOld = 0;
 			handTotalP = 0;
@@ -167,25 +185,27 @@ class player{
 			chk       = false;
 			blkjk     = false;
 			betchk    = false;
-			dd        = true;
 			hand.clear();
 		}
 		
-		int getHandTotal(){
+		int getHandTotal()
+		{
 			return handTotal;
 		}
 		
-		deck play(deck d){
+		deck play(deck d)
+		{
 			std::string mov;
 			std::string String;
+			bool dd = true;
 			
-			if(handTotal==21){
+			if (handTotal==21) {
 				std::cout<<"You got 21!"<<std::endl;
 				chk=true;
-			}else{
-				if(dd){
+			} else {
+				if (dd) {
 					std::cout<<"Enter your move (hit/stand/double down) (h/s/dd)"<<std::endl;
-				}else{
+				} else {
 					std::cout<<"Enter your move (hit/stand) (h/s)"<<std::endl;
 				}
 				
@@ -206,17 +226,35 @@ class player{
 			}
 			return d;
 		}
+
+		deck autoPlay(deck d, int dealerPubHand)
+		{
+			if (handTotal==21) {
+				chk=true;
+			} else {
+				
+			}
+
+			return d;
+		}
 		
-		bool getBust(){
+		bool getBust()
+		{
 			return bust;
 		}
-		bool getChk(){
+
+		bool getChk()
+		{
 			return chk;
 		}
-		bool getBlkjk(){
+
+		bool getBlkjk()
+		{
 			return blkjk;
 		}
-		void inspectHand(){
+
+		void inspectHand()
+		{
 			if(handContains(1) && handTotal<=10){
 				ace();
 			}
@@ -230,7 +268,9 @@ class player{
 			}
 			std::cout<<std::endl;
 		}
-		bool checkBet(int bet){
+
+		bool checkBet(int bet)
+		{
 			betchk = false;
 			if(bet>getFunds()){
 				std::cout<<"Bet is larger than total cash."<<std::endl;
@@ -243,7 +283,8 @@ class player{
 			return betchk;
 		}
 		
-		bool handContains(int i){
+		bool handContains(int i)
+		{
 			std::vector<int>::iterator iter;
 			for(iter=hand.begin();iter!=hand.end();++iter){
 				if(*iter==i){
@@ -253,7 +294,8 @@ class player{
 			return false;
 		}
 		
-		void ace(){
+		void ace()
+		{
 			std::vector<int>::iterator iter;
 			for(iter=hand.begin();iter!=hand.end();++iter){
 				if(*iter==1){
@@ -264,7 +306,8 @@ class player{
 			}
 		}
 		
-		void rAce(){
+		void rAce()
+		{
 			std::vector<int>::iterator iter;
 			for(iter=hand.begin();iter!=hand.end();++iter){
 				if(*iter==11){
@@ -274,9 +317,10 @@ class player{
 				}
 			}
 		}
+
 	private:
 		int funds, lastBet, handTotal,handTotalP,handTotalOld;
-		bool bust,chk,blkjk,betchk,dd;
+		bool bust,chk,blkjk,betchk;
 		std::vector<int> hand;
 		std::string name;
 };

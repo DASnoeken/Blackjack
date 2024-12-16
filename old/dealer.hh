@@ -7,7 +7,8 @@
 class dealer{
 	public:
 		dealer(){}
-		deck getCards(deck d,player P){
+		deck getCards(deck d,player P)
+		{
 			insur = 0;
 			dealerBJ=false;
 			int card1 = d.giveCard();
@@ -50,7 +51,9 @@ class dealer{
 			}
 			return d;
 		}
-		void dealerBlackJack(player P){
+
+		void dealerBlackJack(player P)
+		{
 			if(!P.getBlkjk()){
 				P.lose();
 				dealerBJ=true;
@@ -58,19 +61,29 @@ class dealer{
 				dealerBJ=false;
 			}
 		}
-		bool getDBJ(){
+
+		bool getDBJ()
+		{
 			return dealerBJ;
 		}
-		int getInsur(){
+
+		int getInsur()
+		{
 			return insur;
 		}
-		int getPubHandTotal(){
+
+		int getPubHandTotal()
+		{
 			return PubHandTotal;
 		}
-		int getHandTotal(){
+
+		int getHandTotal()
+		{
 			return handTotal;
 		}
-		deck play(deck d){
+
+		deck play(deck d)
+		{
 			std::cout<<"Dealer reveals: "<<handTotal<<std::endl;
 			std::this_thread::sleep_for(std::chrono::milliseconds(200));
 			if(handTotal<17){
@@ -90,13 +103,18 @@ class dealer{
 			//std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 			return d;
 		}
-		void reveal(){
+
+		void reveal()
+		{
 			std::cout<<"Dealer reveals: "<<handTotal<<std::endl;
 		}
-		void reset(){
+
+		void reset()
+		{
 			PubHandTotal=0;
 			handTotal=0;
 		}
+		
 	private:
 		int PubHandTotal, handTotal, insur;
 		bool dealerBJ;
