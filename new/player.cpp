@@ -54,12 +54,22 @@ void Player::stand()
     this->playerStands = true;
 }
 
+bool Player::hasAce()
+{
+    for (std::vector<card>::iterator it = this->hand.begin(); it != this->hand.end(); ++it) {
+        if (it->getAce()) {
+            return true;
+        }
+    }
+    return false;
+}
+
 void Player::move(Deck& deck, int dealerUpCard)
 {
     int handTotal = this->handTotal();
     if (handTotal == 11 || (handTotal == 10 && dealerUpCard < 10) || (handTotal == 9 && (dealerUpCard > 2 || dealerUpCard < 7))) {
         this->doubleDown(deck);
-    } else if ((handTotal < 11) || (handTotal > 11 && handTotal < 17 && dealerUpCard > 6)) {
+    } else if ((handTotal < 11) || (handTotal > 11 && handTotal < 17 && dealerUpCard > 6) || (this->hasAce() && handTotal <= 17)) {
         this->hit(deck);
     } else {
         this->stand();

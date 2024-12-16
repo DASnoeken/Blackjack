@@ -11,6 +11,7 @@ int main()
     std::vector<float> succRates;
     float roundedSuccessRate;
 
+    std::cout<<"Running..."<<'\n';
     for (int j=1; j<samples; ++j) {
         for (int i=1; i<=500; ++i) {
             result = play(deck, dealer);
@@ -20,10 +21,11 @@ int main()
             total++;
         }
         roundedSuccessRate = static_cast<float>(static_cast<int>(success/total*100. * 100.0)) / 100.0;
-        std::cout<<"Success: " << roundedSuccessRate << "%"<<std::endl;
+        //std::cout<<"Success: " << roundedSuccessRate << "%"<<std::endl;
         succRates.push_back(roundedSuccessRate);
     }
     double avgSuccess = average(succRates);
     double stDev = stdev(succRates, avgSuccess);
-    std::cout<<"Avg success: "<<avgSuccess<<"%\n"<<"STDEV: "<<stDev<<"%\n";
+    double median = Median(succRates);
+    std::cout<<"Avg success: "<<avgSuccess<<"%\n"<<"STDEV: "<<stDev<<"%\n"<<"Median: "<<median<<"%\n";
 }

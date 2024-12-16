@@ -90,3 +90,18 @@ double stdev(std::vector<float> v, const double avg)
 
     return sqrt(sum / v.size());
 }
+
+double Median(std::vector<float> v)
+{
+    int n = v.size();
+    // Sort the vector
+    sort(v.begin(), v.end());
+
+    // Check if the number of elements is odd
+    if (n % 2 != 0)
+        return (double)v[n / 2];
+
+    // If the number of elements is even, return the average
+    // of the two middle elements
+    return (double)(v[(n - 1) / 2] + v[n / 2]) / 2.0;
+}

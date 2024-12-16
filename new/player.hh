@@ -26,4 +26,5 @@ class Player {
         void hit(Deck& deck);
         void stand();
         void doubleDown(Deck& deck);
+        bool hasAce();
 };
