@@ -19,7 +19,7 @@ void Player::bet(int bet)
 
 int Player::handTotal()
 {
-    return std::accumulate(this->hand.begin(), this->hand.end(), 0);
+    return std::accumulate(this->hand.begin(), this->hand.end(), 0); // todo: fix ace
 }
 
 bool Player::bust()
@@ -29,7 +29,7 @@ bool Player::bust()
 
 void Player::doubleDown(Deck& deck)
 {
-    this->hit(deck);
+    this->hit(deck); //todo: fix bet
     this->playerStands = true; // double down allows single move
 }
 

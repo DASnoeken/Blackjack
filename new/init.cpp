@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 #include "player.cpp"
 #include "deck.cpp"
 #include "dealer.cpp"
@@ -9,6 +10,9 @@
 
 int findBet(int lastBet, bool lostLastBet) 
 {
+    if (lastBet > 100) {
+        lastBet = 100;
+    }
     return (lostLastBet ? lastBet * 2 : INITIAL_BET);
 }
 
@@ -56,4 +60,33 @@ int play(Deck& deck, Dealer& dealer)
     }
     
     return player.getMoney();
+}
+
+/**
+ * Calculate the average of a vector of floats
+ * @returns The average of all the elements of vector v
+ */
+double average(std::vector<float> v)
+{
+    // Find sum of array element
+    double sum = 0;
+    sum += std::accumulate(v.begin(), v.end(), 0);
+
+    return sum / v.size();
+}
+
+/**
+ * Calculate the standarddeviation of a vector and its average value
+ * @returns standard deviation of vector v
+ */
+double stdev(std::vector<float> v, double avg)
+{
+    double x;
+    double sum = 0;
+    for (std::vector<float>::iterator it = v.begin(); it != v.end(); ++it) {
+        x = *it - avg;
+        sum += pow(x, 2);
+    }
+
+    return sqrt(sum / v.size());
 }
