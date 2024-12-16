@@ -39,7 +39,8 @@ bool Player::bust()
 
 void Player::doubleDown(Deck& deck)
 {
-    this->hit(deck); //todo: fix bet
+    this->hit(deck);
+    this->doubledDown = true;
     this->playerStands = true; // double down allows single move
 }
 
@@ -81,6 +82,9 @@ Deck Player::getCards(Deck& deck)
 void Player::win(int bet)
 {
     this->money += (bet * 2);
+    if (this->doubledDown) {
+        this->money += (bet * 2);
+    }
 }
 
 void Player::push(int bet)

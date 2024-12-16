@@ -17,11 +17,11 @@ class Player {
 
         // @return true if player stands
         bool stands() {return this->playerStands;}
-        void reset() {this->playerStands = false; this->hand.clear();}
+        void reset() {this->playerStands = false; this->hand.clear(); this->doubledDown = false;}
 
     private:
         int money;
-        bool playerStands;
+        bool playerStands, doubledDown;
         std::vector<card> hand;
         void hit(Deck& deck);
         void stand();
