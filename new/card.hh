@@ -6,6 +6,12 @@ class card
 		card(int i)
 		{
 			value = i;
+			ace = (value == 11);
+		}
+
+		bool getAce()
+		{
+			return ace;
 		}
 
 		int getValue()
@@ -15,5 +21,6 @@ class card
 		
 	private:
 		int value;
+		bool ace;
 };
 #endif

@@ -19,7 +19,17 @@ void Player::bet(int bet)
 
 int Player::handTotal()
 {
-    return std::accumulate(this->hand.begin(), this->hand.end(), 0); // todo: fix ace
+    int total = 0;
+    int aces = false;
+    for (std::vector<card>::iterator it = this->hand.begin(); it != this->hand.end(); ++it) {
+        total += it->getValue();
+        aces += (it->getAce() ? 1 : 0);
+    }
+    while (aces > 0 && total > 21) {
+        total -= 10;
+        aces--;
+    }
+    return total;
 }
 
 bool Player::bust()

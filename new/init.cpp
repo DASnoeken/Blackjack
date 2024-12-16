@@ -66,7 +66,7 @@ int play(Deck& deck, Dealer& dealer)
  * Calculate the average of a vector of floats
  * @returns The average of all the elements of vector v
  */
-double average(std::vector<float> v)
+double average(const std::vector<float> v)
 {
     // Find sum of array element
     double sum = 0;
@@ -79,7 +79,7 @@ double average(std::vector<float> v)
  * Calculate the standarddeviation of a vector and its average value
  * @returns standard deviation of vector v
  */
-double stdev(std::vector<float> v, double avg)
+double stdev(std::vector<float> v, const double avg)
 {
     double x;
     double sum = 0;
