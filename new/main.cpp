@@ -3,7 +3,7 @@
 int main() 
 {
     Dealer dealer;
-	Deck deck;
+    Deck deck;
     int result;
     const int experiments = 30;
     const int games = 100;
