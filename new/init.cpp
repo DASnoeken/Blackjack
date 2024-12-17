@@ -3,7 +3,7 @@
 #include "player.cpp"
 #include "deck.cpp"
 #include "dealer.cpp"
-#define MAX_ITERATIONS 100
+#define MAX_ITERATIONS 75
 #define INITIAL_BET 5
 #define START_CASH 500
 #define ACCEPTABLE 550
@@ -33,6 +33,15 @@ int play(Deck& deck, Dealer& dealer)
         }
         deck = player.getCards(deck);
         deck = dealer.getCards(deck);
+        if (player.blackJack()) {
+            lostLastBet = false;
+            if ( !dealer.blackJack()) {
+                player.win((float) bet * 3/2);
+            } else {
+                player.push(bet);
+            }
+            continue;
+        }
 
         while (!player.bust() && !player.stands() && !player.blackJack()) {
             player.move(deck, dealer.getUpCard());

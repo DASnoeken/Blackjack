@@ -89,7 +89,7 @@ Deck Player::getCards(Deck& deck)
     return deck;
 }
 
-void Player::win(int bet)
+void Player::win(float bet)
 {
     this->money += (bet * 2);
     if (this->doubledDown) {

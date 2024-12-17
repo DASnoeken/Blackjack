@@ -6,7 +6,7 @@ class Player {
         Player(int m);
         bool checkBet(int bet);
         void bet(int bet);
-        void win(int bet);
+        void win(float bet);
         void push(int bet);
         int handTotal();
         bool bust();
