@@ -23,7 +23,6 @@ int main()
             total++;
         }
         roundedSuccessRate = static_cast<float>(static_cast<int>(success/total*100. * 100.0)) / 100.0;
-        //std::cout<<"Success: " << roundedSuccessRate << "%"<<std::endl;
         succRates.push_back(roundedSuccessRate);
     }
     double avgSuccess = average(succRates);
