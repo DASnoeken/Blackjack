@@ -18,7 +18,7 @@ int main()
     double avgWinnings = 0;
     for (int j=1; j<experiments; ++j) {
         for (int i=1; i<=games; ++i) {
-            result = play(deck, dealer);
+            result = GameManager::play(deck, dealer);
             totalWinnings += (result - START_CASH);
             if (result >= START_CASH) {
                 success++;

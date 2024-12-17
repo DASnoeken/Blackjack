@@ -1,6 +1,5 @@
 #include "player.hh"
 #include "deck.hh"
-#include <numeric> //std::accumulate
 
 Player::Player(int m)
 {
